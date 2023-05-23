@@ -122,4 +122,24 @@ export const deviceFields: INodeProperties[] = [
 		default: false,
 		description:'List and Set device states',
 	},
+	{
+		displayName: 'Device channel',
+		name: 'deviceChannel',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+			maxValue: 4,
+		},
+		displayOptions: {
+				show: {
+						operation: [
+								'setDevicePowerState',
+						],
+						resource: [
+								'device',
+						],
+				},
+		},
+		description:'Device channel selection (1-4)',
+	},
 ];

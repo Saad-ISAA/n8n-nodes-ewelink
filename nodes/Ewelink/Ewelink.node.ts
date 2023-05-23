@@ -176,8 +176,13 @@ export class Ewelink implements INodeType {
 				if (operation === 'setDevicePowerState') {
 					const deviceId = this.getNodeParameter('deviceId', 0) as string;
 					const devicePowerState = this.getNodeParameter('devicePowerState', 0) as boolean;
+					const deviceChannel = this.getNodeParameter('deviceChannel', 0);
 
-					responseData = await connection.setDevicePowerState(deviceId, devicePowerState ? 'on' : 'off');
+					let channel = 1
+					if (typeof deviceChannel != 'undefined' && !isNaN(deviceChannel)) {
+						channel = Number(deviceChannel)
+					}
+					responseData = await connection.setDevicePowerState(deviceId, devicePowerState ? 'on' : 'off', channel);
 					//@ts-ignore
 					returnData.push(responseData);
 				}
